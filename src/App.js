@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import Choose from './pages/Choose';
 
+import './styles/App.css';
+
 const router = createBrowserRouter([
   {
     path: '/',
