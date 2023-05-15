@@ -27,19 +27,15 @@ const Map = () => {
 
   const setCenter = () => {
     // 이동할 위도 경도 위치를 생성합니다
-    let moveLatLon = new kakao.maps.LatLng(
-      latitude + 0.0043344,
-      longitude + 0.003303
-    );
+    let moveLatLon = new kakao.maps.LatLng(latitude, longitude);
 
     // 지도 중심을 이동 시킵니다
     map.setCenter(moveLatLon);
 
     // 마커가 표시될 위치입니다
-    let markerPosition = new kakao.maps.LatLng(
-      latitude + 0.0043344,
-      longitude + 0.003303
-    );
+    let markerPosition = new kakao.maps.LatLng(latitude, longitude);
+
+    // chrome에서는 latitude에 + 0.0043344, longitude에 + 0.003303 해줘야 함
 
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
