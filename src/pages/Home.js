@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Map from '../components/Map';
 
 const Home = () => {
@@ -8,4 +10,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
