@@ -1,0 +1,14 @@
+@import '../variables';
+
+#header-wrapper {
+  position: absolute;
+  width: 670px;
+  z-index: 1;
+  box-sizing: border-box;
+  background-color: $blue;
+  color: white;
+  padding: 20px 15px;
+  #bars-icon {
+    color: white;
+  }
+}

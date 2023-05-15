@@ -1,12 +1,14 @@
 import React from 'react';
 
 import Map from '../components/Map';
+import Header from '../components/Header';
 
 const Home = () => {
   return (
-    <h2>
+    <div>
+      <Header />
       <Map />
-    </h2>
+    </div>
   );
 };
 
