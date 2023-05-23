@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import useGeolocation from 'react-hook-geolocation';
+import axios from 'axios';
 
 import '../styles/components/Map.scss';
 
 const Map = () => {
   let [map, setMap] = useState(); // 지도
-  // let [marker, setMarker] = useState();
+  let toilets2 = [];
 
   const geolocation = useGeolocation();
   let latitude = geolocation.latitude; // 현재 위치의 위도
@@ -22,7 +23,28 @@ const Map = () => {
     };
 
     setMap(new kakao.maps.Map(container, options));
-    //const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    // const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+    // 화장실 데이터 가져오기
+    axios.get('http://127.0.0.1:8000/api/toilet/all/').then((result) => {
+      let toilets = result.data;
+
+      // 화장실 주소 -> x, y 좌표로 변환
+      toilets.forEach((toilet) => {
+        axios
+          .get(
+            `https://dapi.kakao.com/v2/local/search/address.json?query=${toilet.address}`,
+            {
+              headers: {
+                Authorization: 'KakaoAK 00d79c323d355d5b4cab550d623380d3',
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data.documents); // documents 내부에 x, y 좌표 있음..
+          });
+      });
+    });
   }, []);
 
   const setCenter = () => {
