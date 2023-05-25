@@ -6,7 +6,7 @@ import '../styles/components/Map.scss';
 
 const Map = () => {
   let [map, setMap] = useState(); // 지도
-  let toilets2 = [];
+  let [positions, setPositions] = useState([]);
 
   const geolocation = useGeolocation();
   let latitude = geolocation.latitude; // 현재 위치의 위도
@@ -26,25 +26,64 @@ const Map = () => {
     // const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
     // 화장실 데이터 가져오기
-    axios.get('http://127.0.0.1:8000/api/toilet/all/').then((result) => {
+    const getToilets = async () => {
+      let result = await axios.get('http://127.0.0.1:8000/api/toilet/all/');
       let toilets = result.data;
 
       // 화장실 주소 -> x, y 좌표로 변환
       toilets.forEach((toilet) => {
-        axios
-          .get(
+        const getPositions = async () => {
+          let response = await axios.get(
             `https://dapi.kakao.com/v2/local/search/address.json?query=${toilet.address}`,
             {
               headers: {
                 Authorization: 'KakaoAK 00d79c323d355d5b4cab550d623380d3',
               },
             }
-          )
-          .then((response) => {
-            console.log(response.data.documents); // documents 내부에 x, y 좌표 있음..
+          );
+
+          if (response.data.documents.length <= 0) {
+            return;
+          }
+
+          let position = {
+            title: toilet.name,
+            latlng: new kakao.maps.LatLng(
+              response.data.documents[0].x,
+              response.data.documents[0].y
+            ),
+          };
+
+          // 마커 이미지의 이미지 주소입니다
+          let imageSrc =
+            'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+
+          // 마커 이미지의 이미지 크기 입니다
+          let imageSize = new kakao.maps.Size(24, 35);
+
+          // 마커 이미지를 생성합니다
+          let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+          // 마커를 생성합니다
+          // let marker = new kakao.maps.Marker({
+          //   map: map, // 마커를 표시할 지도
+          //   position: position.latlng, // 마커를 표시할 위치
+          //   title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          //   image: markerImage, // 마커 이미지
+          // });
+
+          positions.push({
+            position: position.latlng,
+            title: position.title,
+            image: markerImage,
           });
+        };
+
+        getPositions();
       });
-    });
+    };
+
+    getToilets();
   }, []);
 
   const setCenter = () => {
@@ -66,6 +105,19 @@ const Map = () => {
 
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
+
+    positions.forEach((position) => {
+      let marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: position.latlng, // 마커를 표시할 위치
+        title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image: position.image, // 마커 이미지
+      });
+
+      marker.setMap(map);
+
+      console.log(marker);
+    });
   };
 
   if (geolocation.latitude !== null) {
