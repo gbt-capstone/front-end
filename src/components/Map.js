@@ -48,7 +48,7 @@ const Map = () => {
           }
 
           let position = {
-            title: toilet.name,
+            title: `<div id='info-window'>${toilet.name}</div>`,
             latlng: new kakao.maps.LatLng(
               response.data.documents[0].y,
               response.data.documents[0].x
