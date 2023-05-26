@@ -7,6 +7,7 @@ import '../styles/components/Map.scss';
 const Map = () => {
   let [map, setMap] = useState(); // 지도
   let [positions, setPositions] = useState([]);
+  let [markers, setMarkers] = useState([]);
 
   const geolocation = useGeolocation();
   let latitude = geolocation.latitude; // 현재 위치의 위도
@@ -64,14 +65,6 @@ const Map = () => {
           // 마커 이미지를 생성합니다
           let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-          // 마커를 생성합니다
-          // let marker = new kakao.maps.Marker({
-          //   map: map, // 마커를 표시할 지도
-          //   position: position.latlng, // 마커를 표시할 위치
-          //   title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-          //   image: markerImage, // 마커 이미지
-          // });
-
           positions.push({
             position: position.latlng,
             title: position.title,
@@ -113,15 +106,46 @@ const Map = () => {
         title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image: position.image, // 마커 이미지
       });
-      // marker.setMap(map);
-      console.log(marker);
-      // console.log(map);
+      markers.push(marker);
+
+      let infowindow = new kakao.maps.InfoWindow({
+        content: position.title, // 인포윈도우에 표시할 내용
+      });
+
+      kakao.maps.event.addListener(
+        marker,
+        'mouseover',
+        makeOverListener(map, marker, infowindow)
+      );
+      kakao.maps.event.addListener(
+        marker,
+        'mouseout',
+        makeOutListener(infowindow)
+      );
     });
   };
+
+  // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+  function makeOverListener(map, marker, infowindow) {
+    return function () {
+      infowindow.open(map, marker);
+    };
+  }
+
+  // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+  function makeOutListener(infowindow) {
+    return function () {
+      infowindow.close();
+    };
+  }
 
   if (geolocation.latitude !== null) {
     setCenter();
   }
+
+  // if(markers.length > 0) {
+  //   markers.
+  // }
 
   return <div id='map'></div>;
 };
