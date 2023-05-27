@@ -143,9 +143,25 @@ const Map = () => {
     setCenter();
   }
 
-  // if(markers.length > 0) {
-  //   markers.
-  // }
+  if (markers.length > 0) {
+    markers.forEach((marker) => {
+      kakao.maps.event.addListener(marker, 'click', async function () {
+        let temp1 = marker.Gb.split('>')[1];
+        let title = temp1.split('<')[0]; // title = 화장실 이름
+
+        let result = await axios.get('http://127.0.0.1:8000/api/toilet/all/');
+        let toilets = result.data;
+
+        let toilet = toilets.filter((toilet) => toilet.name === title);
+        console.log(toilet[0].id);
+
+        let result2 = await axios.get(
+          `http://127.0.0.1:8000/api/toilet?id=${toilet[0].id}`
+        );
+        console.log(result2);
+      });
+    });
+  }
 
   return <div id='map'></div>;
 };
