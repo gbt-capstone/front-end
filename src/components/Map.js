@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import useGeolocation from 'react-hook-geolocation';
 import axios from 'axios';
 
 import '../styles/components/Map.scss';
 
+import {
+  ModalStateContext,
+  ModalDispatchContext,
+  ToiletInfoDispatchContext,
+} from '../App';
+
 const Map = () => {
+  const openModal = useContext(ModalStateContext);
+  const { onToggle } = useContext(ModalDispatchContext);
+  const { onUpdate } = useContext(ToiletInfoDispatchContext);
+
   let [map, setMap] = useState(); // 지도
   let [positions, setPositions] = useState([]);
   let [markers, setMarkers] = useState([]);
@@ -159,6 +169,9 @@ const Map = () => {
           `http://127.0.0.1:8000/api/toilet?id=${toilet[0].id}`
         );
         console.log(result2);
+
+        onToggle(); // 모달 창 오픈 또는 클로즈
+        onUpdate(result2);
       });
     });
   }
