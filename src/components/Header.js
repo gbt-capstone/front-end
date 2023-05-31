@@ -6,6 +6,8 @@ import {
   faSearch,
 } from '@fortawesome/fontawesome-free-solid';
 
+import React from 'react';
+
 import '../styles/components/Header.scss';
 
 fontawesome.library.add(faCheckSquare, faCoffee, faSearch);
@@ -24,4 +26,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

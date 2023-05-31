@@ -172,6 +172,25 @@ const Map = () => {
 
         onToggle(); // 모달 창 오픈 또는 클로즈
         onUpdate(result2);
+
+        // 지도 센터를 해당 화장실 위치로 이동
+        let response = await axios.get(
+          `https://dapi.kakao.com/v2/local/search/address.json?query=${result2.data.address}`,
+          {
+            headers: {
+              Authorization: 'KakaoAK 00d79c323d355d5b4cab550d623380d3',
+            },
+          }
+        );
+
+        // 이동할 위도 경도 위치를 생성합니다
+        let moveLatLon = new kakao.maps.LatLng(
+          response.data.documents[0].y,
+          response.data.documents[0].x
+        );
+
+        // 지도 중심을 이동 시킵니다
+        map.setCenter(moveLatLon);
       });
     });
   }
