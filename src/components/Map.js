@@ -163,15 +163,14 @@ const Map = () => {
         let toilets = result.data;
 
         let toilet = toilets.filter((toilet) => toilet.name === title);
-        console.log(toilet[0].id);
 
+        // toilet[0].id = 화장실 id값
         let result2 = await axios.get(
           `http://127.0.0.1:8000/api/toilet?id=${toilet[0].id}`
         );
-        console.log(result2);
 
         onToggle(); // 모달 창 오픈 또는 클로즈
-        onUpdate(result2);
+        onUpdate(result2); // reuslt2 = 화장실 detail 정보
 
         // 지도 센터를 해당 화장실 위치로 이동
         let response = await axios.get(
