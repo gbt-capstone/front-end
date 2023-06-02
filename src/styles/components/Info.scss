@@ -19,6 +19,23 @@
       justify-content: space-between;
       font-size: 20px;
       margin-bottom: 20px;
+      h1 {
+        font-size: 23px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+      }
+      button.btn {
+        background-color: $blue;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: 15px;
+        border: 0.2px solid black;
+        padding: 8px 13px;
+        margin: 0px 5px;
+      }
     }
     .info__detail {
       h3 {
@@ -31,6 +48,20 @@
           margin: 3px;
           margin-top: 4px;
           margin-right: 6px;
+        }
+        div#xmark {
+          margin: 3px;
+          margin-right: 5px;
+          padding: 1px 5px;
+          padding-bottom: 3px;
+          border-radius: 50%;
+          font-size: 13px;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          background-color: black;
         }
       }
     }

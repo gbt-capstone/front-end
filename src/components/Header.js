@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import fontawesome from '@fortawesome/fontawesome';
-import {
-  faCheckSquare,
-  faCoffee,
-  faSearch,
-} from '@fortawesome/fontawesome-free-solid';
+// import {
+//   faCheckSquare,
+//   faCoffee,
+//   faSearch,
+// } from '@fortawesome/fontawesome-free-solid';
 
 import React from 'react';
 
 import '../styles/components/Header.scss';
 
-fontawesome.library.add(faCheckSquare, faCoffee, faSearch);
+// fontawesome.library.add(faCheckSquare, faCoffee, faSearch);
 
 const Header = () => {
   return (
