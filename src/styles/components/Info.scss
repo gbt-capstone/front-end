@@ -8,6 +8,8 @@
   display: flex;
   align-items: flex-end;
   .Info__wrapper {
+    height: 210px;
+    overflow: auto;
     margin: 0 auto;
     width: 90%;
     padding: 27px;
@@ -26,15 +28,21 @@
         align-items: center;
       }
       button.btn {
-        background-color: $blue;
-        color: white;
         font-size: 15px;
         cursor: pointer;
         font-weight: 500;
         border-radius: 15px;
-        border: 0.2px solid black;
         padding: 8px 13px;
         margin: 0px 5px;
+        &.review {
+          background-color: $blue;
+          color: white;
+        }
+        &.edit {
+          background-color: white;
+          color: $blue;
+          border: 1px solid black;
+        }
       }
     }
     .info__detail {
@@ -42,17 +50,21 @@
         display: flex;
         align-items: center;
         padding: 7px 0px;
+        &.cleanness {
+          margin-bottom: 13px;
+        }
         #check-icon {
           display: flex;
           align-items: center;
           margin: 3px;
           margin-top: 4px;
           margin-right: 6px;
+          color: $green;
         }
         div#xmark {
           margin: 3px;
           margin-right: 5px;
-          padding: 1px 5px;
+          padding: 0.3px 4.5px;
           padding-bottom: 3px;
           border-radius: 50%;
           font-size: 13px;
@@ -61,7 +73,7 @@
           justify-content: center;
           align-items: center;
           color: white;
-          background-color: black;
+          background-color: $red;
         }
       }
     }

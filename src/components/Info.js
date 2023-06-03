@@ -19,14 +19,14 @@ const Info = () => {
         <div className='info__header'>
           <h1>{toiletInfo.name}</h1>
           <div>
-            <button className='btn'>리뷰 쓰기</button>
-            <button className='btn'>수정하기</button>
+            <button className='btn review'>리뷰 쓰기</button>
+            <button className='btn edit'>수정하기</button>
           </div>
         </div>
         <div className='info__detail'>
           <h3>주소: {toiletInfo.address}</h3>
           <h3>좌변기 개수: {toiletInfo.toilet_count}개</h3>
-          <h3>청결도: {toiletInfo.cleanliness}</h3>
+          <h3 className='cleanness'>청결도: {toiletInfo.cleanliness}</h3>
           <h3>
             {toiletInfo.separate === 'Y' ? (
               <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
