@@ -1,10 +1,13 @@
 @import '../variables';
 
 .Intro {
+  animation: fadeout 2s ease-in-out forwards;
+  animation-delay: 2s;
+  // animation-duration: infinite;
   width: 670px;
   height: 100vh;
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   background-color: $blue;
   box-sizing: border-box;
   border: 8px solid black;
@@ -32,5 +35,16 @@
     font-size: 23px;
     font-family: $noto;
     margin-top: 20px;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
   }
 }
