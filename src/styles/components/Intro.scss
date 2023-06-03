@@ -1,0 +1,36 @@
+@import '../variables';
+
+.Intro {
+  width: 670px;
+  height: 100vh;
+  position: absolute;
+  z-index: 5;
+  background-color: $blue;
+  box-sizing: border-box;
+  border: 8px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img.toilet__img {
+    background-color: white;
+    width: 140px;
+    padding: 30px;
+    border-radius: 30%;
+    border: 8px solid black;
+  }
+  h1.title {
+    color: white;
+    font-size: 38px;
+    font-weight: 600;
+    font-family: $noto;
+    //  color: $blue;
+    margin-top: 30px;
+  }
+  h3.sub_title {
+    color: white;
+    font-size: 23px;
+    font-family: $noto;
+    margin-top: 20px;
+  }
+}
