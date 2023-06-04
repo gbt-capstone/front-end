@@ -77,5 +77,18 @@
         }
       }
     }
+    .br {
+      border: 1px solid grey;
+    }
+    .review-wrapper {
+      margin-top: 15px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e2e2;
+      .review-title {
+        font-weight: 600;
+        font-size: 20px;
+        font-family: $noto;
+      }
+    }
   }
 }
