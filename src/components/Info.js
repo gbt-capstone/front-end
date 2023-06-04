@@ -6,6 +6,7 @@ import { faCheckCircle } from '@fortawesome/fontawesome-free-solid';
 import '../styles/components/Info.scss';
 
 import Write from './Write';
+import ReviewList from './ReviewList';
 
 import { ToiletInfoStateContext } from '../App';
 
@@ -32,84 +33,90 @@ const Info = () => {
           </div>
         </div>
         {isVisible ? (
-          <Write />
+          <Write toiletId={toiletInfo.id} />
         ) : (
-          <div className='info__detail'>
-            <h3>주소: {toiletInfo.address}</h3>
-            <h3>좌변기 개수: {toiletInfo.toilet_count}개</h3>
-            <h3 className='cleanness'>청결도: {toiletInfo.cleanliness}</h3>
-            <h3>
-              {toiletInfo.separate === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              남녀분리
-            </h3>
-            <h3>
-              {toiletInfo.washstand === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              세면대
-            </h3>
-            <h3>
-              {toiletInfo.hand_sanitizer === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              손세정제
-            </h3>
-            <h3>
-              {toiletInfo.toilet_paper === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              휴지
-            </h3>
-            <h3>
-              {toiletInfo.for_disabled === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              장애인 전용
-            </h3>
-            <h3>
-              {toiletInfo.for_children === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              아동 전용
-            </h3>
-            <h3>
-              {toiletInfo.diaper_change === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              기저귀 교환대
-            </h3>
-            <h3>
-              {toiletInfo.women_safe === 'Y' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              여성 안심 화장실
-            </h3>
-            <h3>
-              {toiletInfo.bellYN === '여' ? (
-                <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
-              ) : (
-                <div id='xmark'>x</div>
-              )}
-              비상벨 여부
-            </h3>
+          <div>
+            <div className='info__detail'>
+              <h3>주소: {toiletInfo.address}</h3>
+              <h3>좌변기 개수: {toiletInfo.toilet_count}개</h3>
+              <h3 className='cleanness'>청결도: {toiletInfo.cleanliness}</h3>
+              <h3>
+                {toiletInfo.separate === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                남녀분리
+              </h3>
+              <h3>
+                {toiletInfo.washstand === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                세면대
+              </h3>
+              <h3>
+                {toiletInfo.hand_sanitizer === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                손세정제
+              </h3>
+              <h3>
+                {toiletInfo.toilet_paper === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                휴지
+              </h3>
+              <h3>
+                {toiletInfo.for_disabled === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                장애인 전용
+              </h3>
+              <h3>
+                {toiletInfo.for_children === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                아동 전용
+              </h3>
+              <h3>
+                {toiletInfo.diaper_change === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                기저귀 교환대
+              </h3>
+              <h3>
+                {toiletInfo.women_safe === 'Y' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                여성 안심 화장실
+              </h3>
+              <h3>
+                {toiletInfo.bellYN === '여' ? (
+                  <FontAwesomeIcon icon='fa-check-circle' id='check-icon' />
+                ) : (
+                  <div id='xmark'>x</div>
+                )}
+                비상벨 여부
+              </h3>
+            </div>
+            <div className='review-wrapper'>
+              <h1 className='review-title'>화장실 리뷰</h1>
+              <ReviewList toiletId={toiletInfo.id} />
+            </div>
           </div>
         )}
       </div>
